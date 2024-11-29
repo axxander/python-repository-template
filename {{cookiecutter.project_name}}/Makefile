@@ -3,7 +3,7 @@ PYTHON := $(VENV)/bin/python
 PIP := $(VENV)/bin/pip
 UV := $(VENV)/bin/uv
 
-.PHONY: init setup sync update 
+.PHONY: init setup sync update
 
 #: Initialise new project, get latest versions for requirements defined in pyproject.toml
 init:
@@ -11,12 +11,16 @@ init:
 	$(PIP) install -U pip uv
 	make update
 	make sync
+	@echo "\nRemember to activate your virtual environment:"
+	@echo "  source $(VENV)/bin/activate"
 
 #: Setup development environment using existing requirements and their versions
 setup:
 	python -m venv $(VENV)
 	$(PIP) install -U pip uv
 	make sync
+	@echo "\nRemember to activate your virtual environment:"
+	@echo "  source $(VENV)/bin/activate"
 
 #: Synchronise virtual environment with requirements files
 sync:
